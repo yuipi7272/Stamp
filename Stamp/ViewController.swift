@@ -103,6 +103,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         // フォトライブラリに保存
         UIImageWriteToSavedPhotosAlbum(capture!, nil, nil, nil)
+        
+        // alertを出す
+        let alert: UIAlertController = UIAlertController(title: "保存", message: "画像の保存が完了しました。", preferredStyle: .alert)
+        // OKボタンをつける
+        alert.addAction(
+                    UIAlertAction(title: "OK",
+                                  style: .default,
+                                  handler: { action in
+                                      // ボタンが押された時の動作
+                                      print("OKボタンが押されました！")
+                                  }))
+        present(alert, animated: true, completion: nil)
     }
 }
 
