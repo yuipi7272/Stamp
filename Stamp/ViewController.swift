@@ -22,12 +22,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Do any additional setup after loading the view.
     }
     
+    
     // ■ タッチイベントの動作
+    // タッチされたとき
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // タッチされた位置を取得
-        let touch: UITouch = touches.first!
-        let location: CGPoint = touch.location(in: self.view)
-        
         // もしimageIndexが0でない(押すスタンプが選ばれている)とき
         if imageIndex != 0 {
             // スタンプサイズを40pxの正方形に指定
@@ -36,15 +34,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             // 押されたスタンプの画像を指定
             let image: UIImage = UIImage(named: imageNameArray[imageIndex - 1])!
             imageView.image = image
-            
-            // タッチされた位置に画像を置く
-            imageView.center = CGPoint(x: location.x, y: location.y)
-            
-            // 画像を表示する
-            self.view.addSubview(imageView)
         }
     }
-    
+    // ドラッグ & ドロップで移動しているとき
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // タッチされた位置を取得
+        let touch: UITouch = touches.first!
+        let location: CGPoint = touch.location(in: self.view)
+        
+        // タッチされた位置に画像を置く
+        imageView.center = CGPoint(x: location.x, y: location.y)
+        
+        // 画像を表示する
+        self.view.addSubview(imageView)
+    }
     // ■ スタンプ用のボタン宣言
     @IBAction func selectedFirst(){
         imageIndex = 1
